@@ -1,5 +1,6 @@
 
 const cookieParser = require("cookie-parser");
+const { name } = require("ejs");
 const express=require("express");
 const app=express();
 const http=require("http");
@@ -11,31 +12,41 @@ app.set("view engine","ejs");
 
 app.use(cookieParser())
 
-io.on("connection",(Socket)=>{
-    console.log("New user has connected",Socket.id);
+app.get("/",(req,res)=>{
+    res.render("index")
+})
+app.post("/login",(req,res)=>{
+    const{name}=req.body;
+ // res.cookie("name",name);
+    res.render("chat",{name});   
+})
 
+
+const users={};
+
+io.on("connection",(Socket)=>{
+
+    console.log("New user has connected",Socket.id);
     Socket.on("chatMessage",(data)=>{
         const {user,text}=data;
-        io.emit("broadcastMessage",{user:user,text:text})
+        users[Socket.id]=data.name
+      //  console.log(users[Socket.id])
+        io.emit("broadcastMessage",{text:text,user:user})
     })
 
     Socket.on("typing",(data)=>{
-        const name=data.name;
-        Socket.broadcast.emit("isActive",{name})
+        const name=data.user;
+        users[Socket.id]=name
+        // console.log(users[Socket.id])
+        Socket.broadcast.emit("isActive",{user:users[Socket.id]})
     })
     
     Socket.on("disconnect",()=>{
         console.log("User disconnected")
     })
 })
-app.get("/",(req,res)=>{
-    res.render("index")
-})
-app.post("/login",(req,res)=>{
-    const{name}=req.body;
-   // console.log(name)
-    res.render("chat",{name});   
-})
+
+
 
 server.listen(8888,(err)=>{
 if(err){console.log(err)}
