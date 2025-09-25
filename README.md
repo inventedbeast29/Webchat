@@ -44,6 +44,8 @@ npm start
 Open your browser and navigate to:
 
 http://localhost:8888
+
+
 🔮 Future Enhancements
 
 Private chat / rooms
