@@ -28,6 +28,7 @@ View Engine: EJS
 Clone the repository:
 
 git clone https://github.com/your-username/chatApp.git
+
 cd chatApp
 
 
