@@ -57,7 +57,6 @@ Message persistence with database (MongoDB/MySQL)
 
 User authentication with JWT
 
-🤝 Contributing
+**Preview**
 
-Pull requests are welcome!
-If you’d like to add features or fix issues, feel free to fork the repo and submit a PR.
+https://www.linkedin.com/posts/abhinavrai05_websockets-expressjs-nodejs-activity-7377012934163619840-Tcyj?utm_source=share&utm_medium=member_desktop&rcm=ACoAADgW0iIBZe-eSMAPfAychDspxNSnbqWWnoE
